@@ -1,0 +1,33 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.5.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+bootJar{
+	archiveName('twitter.jar')
+}
+group = 'com.gabikersul.cloud.tema10.twitter'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile group: 'org.twitter4j',name:'twitter4j-core',version:'4.0.7'
+	implementation ([
+			'org.springframework.boot:spring-boot-starter-web',
+			'org.springframework.boot:spring-boot-starter-actuator:2.2.5.RELEASE',
+			'org.springframework.cloud:spring-cloud-starter-netflix-hystrix:2.2.1.RELEASE',
+			'org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard:2.2.1.RELEASE',
+	])
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
